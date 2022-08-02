@@ -1,5 +1,4 @@
 function permutationEquation(p) {
-    // Write your code here
     let result = []
     for (let i = 0; i < p.length; i++) {
         let index = p.indexOf(i + 1)
