@@ -16,7 +16,6 @@ function taumBday(b, w, bc, wc, z) {
         else
             sum = BigInt(bn * bcn + wn * wcn)
     }
-    
     return sum.toString()
 }
 
