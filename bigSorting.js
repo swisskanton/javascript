@@ -28,7 +28,7 @@ function firstIsBigger(a, b) {
     if (a.length > b.length)
         return true
     else if (a.length == a.length)
-        return (a * 1 > b * 1) ? true : false
+        return (BigInt(a) * 1n > BigInt(b) * 1n) ? true : false
     else
         return false
 }
