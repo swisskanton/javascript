@@ -50,7 +50,7 @@ def decrypt_number(s):
         phone_number += 10 ** i * digit if i > 0 else digit
         num //= 10
         num -= digit
-    return str(phone_number) if str(phone_number + phone_number * 10)[1:] == s else 'impossible'
+    return str(phone_number) if str(int(str(phone_number + phone_number * 10)[1:])) == s else 'impossible'
 
 
 print(decrypt_number('353') == '123')
