@@ -1,3 +1,6 @@
+/**
+* Aldi interview question
+*/
 var arr1 = [1, 2, 3];
 var arr2 = [4, 3, 5];
 var answer = false;
