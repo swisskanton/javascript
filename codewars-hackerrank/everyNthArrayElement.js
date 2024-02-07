@@ -1,16 +1,9 @@
 // https://www.codewars.com/kata/5753b987aeb792508d0010e2
 
 function every(...args){
-  if (args.length == 1)
-    return args[0]
-  let arr = args[0];
-  let start = 0;
-  let step = args[1];
-  if (args.length == 3)
-    start = args[2];
   let res = [];
-  for (let i = start; i < arr.length; i += step)
-    res.push(arr[i]);
+  for (let i = args[2] || 0; i < args[0].length; i += args[1] || 1)
+    res.push(args[0][i]);
   return res;
 }
 
