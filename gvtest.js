@@ -10,3 +10,12 @@ function maxAndSheldon(array) {
     }
     return maximum;
 }
+
+/*
+function maxAndSheldon(array) {
+    let maximum = Math.max(...array);
+    return (maximum == 73) ? "Sheldon's number!": maximum;
+}
+*/
+
+// let maxAndSheldon = array => (Math.max(...array) == 73) ? "Sheldon's number!": Math.max(...array);
