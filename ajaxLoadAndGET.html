@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX GET példa</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <h3>load() használata</h3>
+    <p>A betöltöt tartalom közvetlenül a kijelölt elembe kerül.
+    <div id="content"></div>
+    <br>
+    <h3>tartalom load() használatával</h3>
+    <div id="tartalom"><br id="nemJelenikMeg"></div>
+    <br>
+    <h3>Data tartalom $ajax() hívással</h3>
+    <div id="renderData"></div>
+    <br>
+    <h3>Response tartalom $ajax() hívással</h3>
+    <div id="renderResponse"></div>
+    <br>
+    <h3>Tartalom $get() hívással</h3>
+    <div id="getTartalom"></div>
+    <br>
+
+
+<script>
+    let url = 'https://jsonplaceholder.org/users/1';
+
+    $(document).ready(function () {
+
+        // AJAX load(), akkor érdemes használni, ha közvetlen html adatokat akarsz megjelentetni
+        $("#content").load(url, (response, status, xhr) => {
+            if (status == "success")
+                loadMegjelenites(response);
+            if (status == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+        }),
+
+        // AJAX load() adatok lekérésére
+        $("#nemJelenikMeg").load(url, (response, status, xhr) => {
+            if (status == "success")
+                loadRendesMegjelenites(response);
+            if (status == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+        }),
+
+        // AJAX GET kérés küldése
+        $.ajax({
+            url: url, //'szerver_oldal.php', A szerver oldali fájl elérési útja
+            type: 'GET',                                // metódus típusa
+            data: {},                                  // küldendő adat a szervernek
+            dataType: 'json',                          // Az elvárt válasz típusa (opcionális, például JSON)
+            success: function (result, status, xhr) {
+                // Sikeres válasz esetén végrehajtandó kód
+                console.log('Sikeres AJAX GET kérés', xhr);
+                console.log('Result:', result, 'Status:', status);
+                // Parszolt adatot ad át
+                AJAXResponseMegjelenites(xhr.responseJSON);
+            },
+            error: function (xhr, status, error) {
+                // Hibás válasz esetén végrehajtandó kód
+                console.error('AJAX hiba:', status, error);
+            },
+            complete: function (xhr, status) {
+                // Minden esetlen lefutó kód
+                console.log('Befejezte a munkát az AJAX hívás.', xhr.responseJSON, status);
+            }
+        }),
+
+
+        $.get(url, {}, function(data,status,xhr) {
+            if (status == "success") {
+                let content = `
+                    id: ${data.id} <br>
+                    name: ${data.firstname} ${data.lastname} <br>
+                    city: ${data.address.city}`
+                $('#getTartalom').html(content);
+            }
+            if (status == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+        }, "json")
+    },
+    );
+
+    function loadMegjelenites(data) {
+        // a kapott adatot parszolni kell
+        let user = JSON.parse(data);
+        console.log("Load user:", user)
+        $('#renderData').html(`id: ${user.id} <br> name: ${user.firstname} ${user.lastname} <br> city: ${user.address.city}`);
+    }
+
+    function loadRendesMegjelenites(data) {
+        // a kapott adatot parszolni kell
+        let user = JSON.parse(data);
+        console.log("Load rejtett user:", user)
+        $('#tartalom').html(`id: ${user.id} <br> name: ${user.firstname} ${user.lastname} <br> city: ${user.address.city}`);
+    }
+
+    function AJAXResponseMegjelenites(user) {
+        console.log("Render user:", user)
+        $('#renderResponse').html(`id: ${user.id} <br> name: ${user.firstname} ${user.lastname} <br> city: ${user.address.city}`);
+    }
+
+
+</script>
+
+</body>
+
+</html>
