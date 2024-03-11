@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Hello</p>
+    how are
+    <p>you?</p>
+    <button>Attach/detach paragraphs</button>
+
+    <script>
+        $("p").on("click", function () {
+            $(this).toggleClass("off");
+        });
+        var p;
+        $("button").on("click", function () {
+            if (p) {
+                p.appendTo("body");
+                p = null;
+            } else {
+                p = $("p").detach();
+            }
+        });
+    </script>
+</body>
+
+</html>
