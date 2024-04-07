@@ -1,0 +1,29 @@
+{
+  "name": "js-testing",
+  "version": "1.0.0",
+  "description": "JS Unit, Integration and E2E testing",
+  "main": "app.js",
+  "scripts": {
+    "start": "webpack app.js --mode development --watch",
+    "test": "jest --watchAll --detectOpenHandles"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "testing",
+    "jest",
+    "unit",
+    "integration",
+    "e2e",
+    "puppeteer",
+    "tests"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "puppeteer": "^22.6.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
