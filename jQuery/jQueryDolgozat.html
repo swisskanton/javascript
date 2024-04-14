@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery Dolgozat</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="text/javascript" src="./jquery-3.7.1.js"></script>
+</head>
+
+<body>
+    <!-- 1. feladat ------------------------------------------------------>
+    <h1>Attribute Filters (4 pont)</h1>
+    <div id="content">
+
+        <p>Attribute filters használatával add hozzá a következő <b>"border", "3px solid red"</b> CSS beállításokat
+            azokhoz a paragrafusokhoz, melyeknem azonosítója "<b>para</b>"-val kezdődik és a lang-ben szerepel az
+            "<b>en-</b>".</p>
+
+        <div id="attributeExample">
+            <p class="a">This is paragraph 1</p>
+            <p id="para1">This is paragraph 2</p>
+            <p class="b">This is paragraph 3</p>
+            <p id="para4" lang="en-us">This is paragraph 4</p>
+            <p id="para5" lang="en-gb">This is paragraph 5</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("document").ready(function () {
+            // kód helye
+            $("p[id^=para][lang*=en-]").css("border", "3px solid red");
+        });
+    </script>
+
+    <!-- 2. feladat ------------------------------------------------------>
+    <h1>Creating new document content (6 pont)</h1>
+    <div id="content">
+
+        <p>A <b>Create Content</b> gombra kattintva a createExample tartalma a következő paragrafusra változzon: "<b>Hi
+                there!</b>".</p>
+        <p>A <b>Change All</b> gombra kattintva a createExample tartalma a következő paragrafusra változzon: "<b>
+                < p>This is a paragraph< / p>
+            </b>".</p>
+
+        <div id="createExample">
+            <p class="a">This is paragraph 1</p>
+            <p id="para1">This is paragraph 2</p>
+            <p class="b">This is paragraph 3</p>
+            <p id="para4">This is paragraph 4</p>
+            <p id="para5">This is paragraph 5</p>
+        </div>
+        <div>
+            <button id="create">Create Content</button>
+            <button id="changeAll">Change All</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("document").ready(function () {
+            // kód helye
+            document.getElementById("create").addEventListener("click", function (evt) {
+                createContent();
+            });
+            document.getElementById("changeAll").addEventListener("click", function (evt) {
+                changeAllTheContent();
+            });
+        });
+        function createContent() {
+            // kód helye
+            $("#createExample").html("<p>Hi there!</p>");
+        }
+
+        function changeAllTheContent() {
+            // kód helye
+            $("#createExample p").text("<p>This is a paragraph</p>");
+        }
+    </script>
+
+    <!-- 3. feladat ------------------------------------------------------>
+    <h1>Binding and Unbinding Events (10 pont)</h1>
+    <div id="content">
+
+        <p>Az egérrel, ha az envTarget div-re mennek, akkora classhoz gozzáadódik a highlighted CSS stílus,<br />
+            ha elhagyják az egérrel az envTarget div-et, akkor el lesz távolítva a highlighted CSS stílus a div
+            classból.</p>
+        <p>Ha rákattintanak az envTarget divre, akkor deaktiválódik a hover effect és a highlighted CSS stílus.</p>
+        <div id="evtTarget" class="box"><br />Ha rajtam az egér, akkor piros hover effektusom kell, hogy
+            legyen.<br /><br />
+            Ha kattintanak rám, akkor nincs hover effektusom és nem piros a háttérszínem.
+        </div>
+    </div>
+    <style type='text/css'>
+        .highlighted {
+            background-color: Red;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            // kód helye
+            $("#evtTarget").on("mouseover mouseleave", highlight);
+
+            $("#evtTarget").on("click", function (evt) {
+                $("#evtTarget").off("mouseover mouseleave", highlight);
+                $("#evtTarget").removeClass("highlighted");
+            });
+        });
+
+        function highlight(evt) {
+            // kód helye
+            $("#evtTarget").toggleClass("highlighted");
+        }
+    </script>
+
+    <!-- 4. feladat ------------------------------------------------------>
+    <h1>Element Fading (8 pont)</h1>
+    <div id="content">
+
+        <p><b>Fade Out</b> bombra kattintva tűnjön el az alábbi négyzet.</p>
+        <p><b>Fade In</b> bombra kattintva jelenjen meg az alábbi négyzet.</p>
+        <p><b>Fade To 50%</b> bombra kattintva az alábbi négyzet haványuljon el felére.</p>
+        <p><b>Fade To 100%</b> bombra kattintva az alábbi négyzethalványossága legyen teljes.</p>
+
+        <div id="theDiv" class="box">
+        </div>
+        <button id="fadeout">Fade Out</button>
+        <button id="fadein">Fade In</button>
+        <button id="fadeto3">Fade To 50%</button>
+        <button id="fadeup">Fade To 100%</button>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            // kód helye
+            $("#fadein").click(function () {
+                $("#theDiv").fadeIn("normal");
+            });
+            $("#fadeout").click(function () {
+                $("#theDiv").fadeOut("normal");
+            });
+            $("#fadeto3").click(function () {
+                $("#theDiv").fadeTo("slow", 0.5);
+            });
+            $("#fadeup").click(function () {
+                $("#theDiv").fadeTo("slow", 1);
+            });
+        });
+
+    </script>
+
+    <!-- 5. feladat ------------------------------------------------------>
+    <h1>Animating an Element's Properties (8 pont)</h1>
+    <div id="content">
+
+        <p><b>Original</b> gombra kattintva az eredeti alakját veszi fel a theAnimateDiv elem.</p>
+        <p><b>Grow and move</b> gombra kattintva az elem eltolódik jobbra 500 pixelt, a betűnagyság 24 pt-re nő és az
+            elem szélessége 500 pixelre nő.</p>
+
+
+        <div id="theAnimateDiv">Animate Me</div>
+        <button id="origin">Original</button>
+        <button id="all">Grow and move</button>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            // kód helye
+            $("#origin").click(function () {
+                $("#theAnimateDiv").animate({ left: "100px", fontSize: "16pt", width: "250px" }, 1000, "swing");
+            });
+            $("#all").click(function () {
+                $("#theAnimateDiv").animate({ left: "500px", fontSize: "24pt", width: "500px" }, 1000, "swing");
+            });
+        });
+    </script>
+    <style type="text/css">
+        #theAnimateDiv {
+            position: relative;
+            width: 250px;
+            height: 180px;
+            margin: 10px;
+            padding: 20px;
+            background: #b3c8d0;
+            border: 1px solid black;
+            font-size: 16pt;
+            cursor: pointer;
+            left: 100px;
+        }
+    </style>
+</body>
+
+</html>
